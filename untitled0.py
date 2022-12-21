@@ -7,7 +7,7 @@ Created on Wed Dec 21 11:14:45 2022
 import pandas as pd, numpy as np
 from scipy.optimize import dual_annealing
 
-epm_d = pd.read_excel('C:/Users/user/Desktop/fatigue_lifetime_stress.xlsx', engine = 'openpyxl')
+epm_d = pd.read_csv('lifetime_stress.csv')
 
 def loss(p):
     v0 = p[0]; v1 = p[1]; a = p[2]; b = p[3]; s = p[4]
@@ -25,6 +25,6 @@ def loss(p):
     return -l
 
 bounds = [(0.2, 0.5), (0.5, 0.675), (-10, -0), (-10, -5), (0, 0.5)]
-val = dual_annealing(loss, bounds = bounds, maxiter = 10_000)
+val = dual_annealing(loss, bounds = bounds, maxiter = 100_000)
 min_val = val.fun
 x = val.x 
